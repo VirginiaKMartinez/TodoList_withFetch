@@ -20,52 +20,28 @@ function List(props) {
 			}
 		)
 			.then(resp => {
-				console.log(resp.json);
 				return resp.json();
 			})
-			.then(data => {
-				console.log(data);
-			})
-			.catch(error => {
-				console.log(error);
-			});
+			.then(data => {})
+			.catch(error => {});
 	};
-	const deleteAll = () => {
-		const newList = [];
-		fetch(
-			"https://assets.breatheco.de/apis/fake/todos/user/virginiak_martinez",
-			{
-				method: "PUT",
-				body: JSON.stringify(newList), //lo que le mando  a la base de datos
-				headers: {
-					"Content-Type": "application/json"
-				}
-			}
-		)
-			.then(resp => {
-				console.log(resp.json);
-				return resp.json();
-			})
-			.then(data => {
-				console.log(data);
-			})
-			.catch(error => {
-				console.log(error);
-			});
-	};
+
 	return (
 		<div>
 			{props.itemList.map((itemObj, index) => {
 				//itemObj va a contener todos los items uno por uno
-				return (
-					<div key={index} className="Item">
-						<p>{itemObj.label}</p>
-						<button onClick={() => deleteItem(itemObj.label)}>
-							X
-						</button>
-						<button onClick={() => deleteAll()}>DeleteAll</button>
-					</div>
-				);
+				if (itemObj.label != "cualquiercosa") {
+					return (
+						<div key={index} className="Item">
+							<p>{itemObj.label}</p>
+							<button
+								className="buttonDeleteTask"
+								onClick={() => deleteItem(itemObj.label)}>
+								<i className="fas fa-minus" />
+							</button>
+						</div>
+					);
+				}
 			})}
 		</div>
 	);

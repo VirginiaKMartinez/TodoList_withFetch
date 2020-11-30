@@ -1,22 +1,35 @@
 .Item{
     margin: auto;
+    margin-top: 8px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 350px;
-   background: #fdfdfd;
-   padding: 10px;
-    height: 30px;
+    width: 482px;
+    
+    background: #fdfdfd;
+    padding: 0 10px 0 16px;
+    height: 60px;
     border-bottom: 1px #333333;
     text-align: left;
+    background: #f7f7f7;
 }
 
 p{
     margin:0px;
 }
 
-.Item button{
+.buttonDeleteTask{
     border: none;
     background: none;
+    text-decoration: none;
+    font-size: 20px;
+    font-family: Source Code Pro;
+}
+
+.Item p{
+    font-family: Source Code Pro;
+    color: #333333;
+    font-weight: 400;
+    font-size: 24px;
 }
 
