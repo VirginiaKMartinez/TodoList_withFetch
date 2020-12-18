@@ -12,25 +12,30 @@ function App() {
 	};
 	const addItemToList = () => {
 		//key es para añadirle un identificador único a cada item y así poder borrarlos de manera individual.
-		updateItemList([...itemList, { label: currentItem, done: false }]); //va a ir añadiendo los nuevos items empujando en la lista los que ya existan. Nos saca la lista actualizada.
+		console.log(currentItem);
 
-		fetch(
-			"https://assets.breatheco.de/apis/fake/todos/user/virginiak_martinez",
-			{
-				method: "PUT",
-				body: JSON.stringify(itemList), //lo que le mando  a la base de datos
-				headers: {
-					"Content-Type": "application/json"
+		if (currentItem.trim() != "" && currentItem != null) {
+			console.log(currentItem.trim().length);
+			updateItemList([...itemList, { label: currentItem, done: false }]); //va a ir añadiendo los nuevos items empujando en la lista los que ya existan. Nos saca la lista actualizada.
+
+			fetch(
+				"https://assets.breatheco.de/apis/fake/todos/user/virginiak_martinez",
+				{
+					method: "PUT",
+					body: JSON.stringify(itemList), //lo que le mando  a la base de datos
+					headers: {
+						"Content-Type": "application/json"
+					}
 				}
-			}
-		)
-			.then(resp => {
-				return resp.json();
-			})
-			.then(data => {})
-			.catch(error => {});
-		//console.log("lista items", itemList);
-		setCurrentItem(""); //hace que se vacíe el input después de añadir un item.
+			)
+				.then(resp => {
+					return resp.json();
+				})
+				.then(data => {})
+				.catch(error => {});
+			//console.log("lista items", itemList);
+			setCurrentItem(""); //hace que se vacíe el input después de añadir un item.
+		}
 	};
 
 	useEffect(() => {
@@ -82,6 +87,7 @@ function App() {
 			.then(data => {})
 			.catch(error => {});
 	};
+	console.log(itemList);
 	return (
 		<div className="App">
 			<div className="App-body">
@@ -101,7 +107,9 @@ function App() {
 				<List itemList={itemList} updateItemList={updateItemList} />
 			</div>
 			<div className="TaskCounter">
-				<p>{itemList.length} Tasks left</p>
+				<p>
+					{itemList.length == 0 ? 0 : itemList.length - 1} Tasks left
+				</p>
 			</div>
 			<div className="buttonDeleteAll-body">
 				<button
